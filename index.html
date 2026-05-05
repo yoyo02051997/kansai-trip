@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>關西 5/9–5/17 旅遊攻略｜手機版行程</title>
+  <style>
+    :root {
+      --bg: #fff8ee;
+      --paper: #fffdf8;
+      --ink: #2f261f;
+      --muted: #7a6b5f;
+      --red: #b94635;
+      --orange: #d98a38;
+      --green: #5d8d6b;
+      --blue: #3e79a9;
+      --purple: #7560a8;
+      --line: #ead7c3;
+      --shadow: 0 10px 30px rgba(81, 52, 25, .10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255, 201, 169, .35), transparent 34%),
+        radial-gradient(circle at 95% 10%, rgba(255, 224, 156, .38), transparent 28%),
+        linear-gradient(180deg, #fff4e4 0%, var(--bg) 45%, #fffaf2 100%);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding: 18px 14px 64px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #fff4dc, #fffdf8 52%, #fff0df);
+      border: 1px solid rgba(181, 112, 63, .18);
+      box-shadow: var(--shadow);
+      padding: 26px 18px 20px;
+      margin-bottom: 14px;
+    }
+
+    .hero::before {
+      content: "✿";
+      position: absolute;
+      right: -10px;
+      top: -28px;
+      font-size: 132px;
+      color: rgba(185, 70, 53, .12);
+      transform: rotate(12deg);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(30px, 8vw, 56px);
+      letter-spacing: .03em;
+      line-height: 1.1;
+      color: #7f2017;
+      font-weight: 900;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .chip {
+      background: rgba(255,255,255,.76);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      color: #59463b;
+      white-space: nowrap;
+    }
+
+    .notice {
+      background: #3a2c25;
+      color: #fff8ec;
+      border-radius: 18px;
+      padding: 14px 15px;
+      margin: 12px 0;
+      font-size: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .quicknav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 2px;
+      margin: 0 -2px 8px;
+      background: linear-gradient(180deg, rgba(255,248,238,.98), rgba(255,248,238,.82));
+      backdrop-filter: blur(10px);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .quicknav a {
+      flex: 0 0 auto;
+      text-decoration: none;
+      background: #fffdf8;
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 14px rgba(81,52,25,.06);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #5a4437;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 22px 2px 10px;
+      font-size: 22px;
+      font-weight: 850;
+      color: #4b3125;
+    }
+
+    .section-title span {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #f7dfc6;
+    }
+
+    .overview {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .overview-card {
+      background: rgba(255,253,248,.92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 15px;
+      box-shadow: 0 8px 20px rgba(81,52,25,.06);
+    }
+
+    .overview-card b {
+      display: block;
+      color: #6d2b20;
+      margin-bottom: 3px;
+    }
+
+    .day {
+      background: rgba(255,253,248,.96);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      margin: 16px 0;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .day-head {
+      padding: 15px 15px 13px;
+      color: white;
+      background: linear-gradient(135deg, var(--day-color), color-mix(in srgb, var(--day-color) 72%, #2b170e));
+    }
+
+    .day-head .num {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 2px solid rgba(255,255,255,.88);
+      border-radius: 50%;
+      margin-right: 8px;
+      font-weight: 900;
+      background: rgba(255,255,255,.16);
+    }
+
+    .day-head h2 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .day-head p {
+      margin: 6px 0 0;
+      font-size: 13px;
+      opacity: .95;
+    }
+
+    .day-body {
+      padding: 14px;
+    }
+
+    .scene {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px 0;
+      border-bottom: 1px dashed #e4cfba;
+    }
+
+    .scene:last-child { border-bottom: 0; }
+
+    .time {
+      position: sticky;
+      top: 58px;
+      display: inline-block;
+      text-align: center;
+      padding: 7px 6px;
+      border-radius: 14px;
+      background: #fff4e4;
+      border: 1px solid #efd5bd;
+      color: #7c3b2f;
+      font-weight: 850;
+      font-size: 13px;
+      line-height: 1.25;
+    }
+
+    .place {
+      margin: 0 0 3px;
+      font-size: 17px;
+      font-weight: 850;
+      color: #31241e;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .desc {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 9px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      background: #fff2db;
+      color: #785038;
+      border: 1px solid #ecd5b7;
+    }
+
+    .food {
+      background: linear-gradient(135deg, #fff4e8, #fffdf8);
+      border: 1px solid #eed7c4;
+      border-radius: 18px;
+      padding: 12px;
+      margin: 12px 0 2px;
+    }
+
+    .food b { color: #8a352b; }
+
+    .route {
+      background: #f7fbff;
+      border: 1px solid #d7e8f5;
+      border-radius: 18px;
+      padding: 12px;
+      margin: 12px 0 2px;
+    }
+
+    .route b { color: #2e6993; }
+
+    .mini {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .tip-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .tip {
+      background: #fffdf8;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 13px;
+      box-shadow: 0 8px 20px rgba(81,52,25,.05);
+    }
+
+    .tip b {
+      color: #7f2017;
+    }
+
+    details {
+      background: #fff8ef;
+      border: 1px solid #edd8c6;
+      border-radius: 18px;
+      padding: 12px 13px;
+      margin-top: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 850;
+      color: #5b3529;
+    }
+
+    .footer {
+      text-align: center;
+      margin: 26px 0 0;
+      padding: 18px 14px;
+      color: #fff8ec;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #9c352a, #d88941);
+      box-shadow: var(--shadow);
+      font-weight: 850;
+    }
+
+    .topbtn {
+      position: fixed;
+      right: 14px;
+      bottom: 16px;
+      z-index: 20;
+      border: 0;
+      background: #33241d;
+      color: #fff8ec;
+      border-radius: 999px;
+      padding: 10px 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    @media (min-width: 720px) {
+      .wrap { padding: 28px 18px 78px; }
+      .overview { grid-template-columns: repeat(3, 1fr); }
+      .mini { grid-template-columns: repeat(2, 1fr); }
+      .tip-grid { grid-template-columns: repeat(2, 1fr); }
+      .day-head h2 { font-size: 24px; }
+      .scene { grid-template-columns: 120px 1fr; }
+      .time { font-size: 14px; }
+    }
+
+    @media (max-width: 380px) {
+      .scene { grid-template-columns: 78px 1fr; gap: 9px; }
+      .time { font-size: 12px; }
+      .place { font-size: 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main id="top" class="wrap">
+    <header class="hero">
+      <h1>關西 5/9–5/17<br>旅遊攻略</h1>
+      <p class="subtitle">九天八夜｜京都、伊根、天橋立、美山、宇治、奈良、大阪、姬路、神戶</p>
+      <div class="chips">
+        <span class="chip">✈ 星宇航空</span>
+        <span class="chip">🚆 HARUKA／JR</span>
+        <span class="chip">🚗 包車日</span>
+        <span class="chip">👘 京都和服</span>
+        <span class="chip">🍵 宇治抹茶</span>
+        <span class="chip">🎢 日本環球影城</span>
+      </div>
+    </header>
+
+    <div class="notice">
+      <b>手機閱讀建議：</b>每一天已依「實際路線順序」拆成停留時間、交通時間與餐食建議。實際開放時間、車次與餐廳預約仍建議出發前再次確認。
+    </div>
+
+    <nav class="quicknav" aria-label="日期快速導覽">
+      <a href="#d1">5/9 京都</a>
+      <a href="#d2">5/10 水之京都</a>
+      <a href="#d3">5/11 和服</a>
+      <a href="#d4">5/12 嵐山</a>
+      <a href="#d5">5/13 宇治奈良</a>
+      <a href="#d6">5/14 USJ</a>
+      <a href="#d7">5/15 姬路神戶</a>
+      <a href="#d8">5/16 大阪</a>
+      <a href="#d9">5/17 回家</a>
+    </nav>
+
+    <section>
+      <h2 class="section-title"><span>🧭</span>總覽</h2>
+      <div class="overview">
+        <div class="overview-card">
+          <b>航班</b>
+          去程：5/9 星宇 JX822，桃園 10:15 → 關西 14:00。<br>
+          回程：5/17 星宇 JX821，關西 13:25 → 桃園 15:20。
+        </div>
+        <div class="overview-card">
+          <b>住宿節奏</b>
+          前半段住京都八條都酒店，適合跑京都、伊根、天橋立、美山、嵐山。<br>
+          後半段住大阪市區，方便 USJ、姬路神戶與市區購物。
+        </div>
+        <div class="overview-card">
+          <b>行程強度</b>
+          5/10、5/13、5/15 移動距離較長；5/11 和服日、5/16 大阪市區步行多，建議穿好走的鞋。
+        </div>
+      </div>
+    </section>
+
+    <article id="d1" class="day" style="--day-color:#b94635">
+      <div class="day-head">
+        <h2><span class="num">1</span>5/9（六）出發與京都夜景</h2>
+        <p>桃園 → 關西機場 → 京都｜重點：順利抵達、入住、輕鬆夜拍</p>
+      </div>
+      <div class="day-body">
+        <div class="scene">
+          <div class="time">10:15<br>起飛</div>
+          <div>
+            <h3 class="place">星宇航空 JX822｜桃園 → 關西</h3>
+            <div class="meta">飛行時間約 2 小時 45 分｜抵達關西 14:00</div>
+            <p class="desc">建議提早抵達機場辦理報到與托運。抵達關西機場後，先處理入境、領行李、購買或啟用交通票券。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">15:00<br>左右</div>
+          <div>
+            <h3 class="place">JR 特急 HARUKA 前往京都</h3>
+            <div class="meta">關西機場 → 京都站｜車程約 80 分鐘</div>
+            <p class="desc">HARUKA 是抵達京都最順的方式之一。建議行李多時預留排隊、買票、找月台時間，抵達京都後先到飯店放行李。</p>
+            <div class="tags"><span class="tag">交通重點</span><span class="tag">行李日</span><span class="tag">不要排太滿</span></div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">17:00<br>入住</div>
+          <div>
+            <h3 class="place">京都八條都酒店</h3>
+            <p class="desc">飯店位於京都站八條口一帶，交通便利。建議先整理行李、簡單休息，晚餐與夜拍以不趕路為原則。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">19:00<br>夜拍</div>
+          <div>
+            <h3 class="place">祇園・八坂神社</h3>
+            <p class="desc">晚上可安排祇園街道、花見小路周邊與八坂神社夜景。燈籠、町家與神社夜色很有京都味，適合作為旅程開場。</p>
+            <div class="food"><b>晚餐建議：</b>京都站周邊簡單用餐，或到祇園附近找親子丼、蕎麥麵、居酒屋。第一天不建議排太晚，保留體力。</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="d2" class="day" style="--day-color:#5d8d6b">
+      <div class="day-head">
+        <h2><span class="num">2</span>5/10（日）伊根舟屋・天橋立・美山</h2>
+        <p>包車 7:30 出發｜水之京都一日遊｜移動距離長但景色很值得</p>
+      </div>
+      <div class="day-body">
+        <div class="route"><b>今日路線：</b>京都 → 伊根灣遊船 → 天橋立傘松公園 → 美山茅草屋之里 → 京都。建議全日包車，減少轉車壓力。</div>
+        <div class="scene">
+          <div class="time">07:30<br>出發</div>
+          <div>
+            <h3 class="place">京都飯店出發</h3>
+            <p class="desc">今天景點分散，建議早餐可在前一晚先買好飯糰、麵包或飲料，上車後節省時間。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">10:00<br>前後</div>
+          <div>
+            <h3 class="place">伊根灣遊船・伊根舟屋</h3>
+            <div class="meta">遊船約 25 分鐘｜建議停留 60–90 分鐘</div>
+            <p class="desc">從海上欣賞舟屋是伊根最具代表性的角度。可以拍木造舟屋、海灣倒影與海鳥。若時間充裕，可在舟屋周邊散步或喝咖啡。</p>
+            <div class="tags"><span class="tag">海景</span><span class="tag">舟屋</span><span class="tag">遊船</span></div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">12:00<br>午餐</div>
+          <div>
+            <h3 class="place">伊根或天橋立周邊午餐</h3>
+            <p class="desc">可選海鮮丼、烤魚定食或當地小餐館。若假日人潮多，請司機協助抓用餐時間，避免排隊壓縮後面行程。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">13:30<br>左右</div>
+          <div>
+            <h3 class="place">天橋立傘松公園</h3>
+            <div class="meta">纜車／單人吊椅上下山＋觀景｜建議停留 60–90 分鐘</div>
+            <p class="desc">上到傘松公園後可俯瞰天橋立沙洲。天氣好時視野非常開闊，建議預留拍照、走到觀景台與買飲料的時間。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">16:00<br>前後</div>
+          <div>
+            <h3 class="place">美山茅草屋之里</h3>
+            <div class="meta">建議停留 60–75 分鐘</div>
+            <p class="desc">美山是寧靜鄉村景色，適合慢慢散步拍茅草屋聚落。請留意居民生活區域，拍照避免打擾住戶。</p>
+            <div class="food"><b>必吃小點：</b>美山牛乳、冰淇淋。若天氣偏冷，也可改喝熱飲或買在地伴手禮。</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="d3" class="day" style="--day-color:#d98a38">
+      <div class="day-head">
+        <h2><span class="num">3</span>5/11（一）京都和服日</h2>
+        <p>FIRST 和服店清水店 → 清水寺 → 三嶋亭 → 伏見稻荷 → 還衣服</p>
+      </div>
+      <div class="day-body">
+        <div class="scene">
+          <div class="time">07:30<br>出門</div>
+          <div>
+            <h3 class="place">京都站 → 東福寺 → 清水五條</h3>
+            <p class="desc">從京都搭 JR 到東福寺，再轉京阪電車往出町柳方向，到清水五條站後步行前往和服店。建議提早出門，避免遲到影響換裝。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">09:00<br>換裝</div>
+          <div>
+            <h3 class="place">FIRST 和服店 清水店</h3>
+            <div class="meta">建議停留 60–90 分鐘｜含挑衣、著裝、整理髮型</div>
+            <p class="desc">和服日最大重點是不要趕。建議選擇好走的草履或自備舒適鞋備用，貴重物品輕量化。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">10:30<br>散步</div>
+          <div>
+            <h3 class="place">清水寺・二年坂・三年坂</h3>
+            <div class="meta">建議停留 90–120 分鐘</div>
+            <p class="desc">清水寺舞台、仁王門、三重塔與坂道街景都適合拍照。穿和服行走速度較慢，階梯路段請保留時間。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">12:00<br>午餐</div>
+          <div>
+            <h3 class="place">三嶋亭本店｜壽喜燒</h3>
+            <p class="desc">京都老舖壽喜燒是今日正式餐。建議準時到場，享受和牛、割下醬汁、蛋液與白飯的經典組合。</p>
+            <div class="food"><b>用餐提醒：</b>和服用餐請小心袖口；拍照後先專心吃，避免餐點冷掉。</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">14:30<br>神社</div>
+          <div>
+            <h3 class="place">伏見稻荷大社・千本鳥居</h3>
+            <div class="meta">建議停留 90–120 分鐘</div>
+            <p class="desc">下午前往伏見稻荷，紅色千本鳥居與和服很搭。若體力有限，不一定要走完整座山，拍完主要鳥居段即可。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">17:00<br>還衣</div>
+          <div>
+            <h3 class="place">FIRST 和服店 稻荷店還衣服</h3>
+            <p class="desc">還衣後可在稻荷周邊簡單吃小點，再回京都站或飯店休息。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="d4" class="day" style="--day-color:#3e79a9">
+      <div class="day-head">
+        <h2><span class="num">4</span>5/12（二）嵐山一日遊</h2>
+        <p>龜岡 → 嵯峨野小火車 → 竹林 → 鯛魚料理 → 渡月橋散步</p>
+      </div>
+      <div class="day-body">
+        <div class="scene">
+          <div class="time">09:30<br>早餐</div>
+          <div>
+            <h3 class="place">京都站周邊早餐</h3>
+            <p class="desc">今天步調較悠閒，早餐後再出發。建議先確認嵯峨野小火車票券與集合時間。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">10:30<br>搭車</div>
+          <div>
+            <h3 class="place">京都 → 龜岡</h3>
+            <p class="desc">從京都車站搭車前往龜岡，預留換乘與找小火車月台的時間。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">12:30<br>小火車</div>
+          <div>
+            <h3 class="place">嵯峨野小火車｜龜岡 12:30 → 嵐山 12:50</h3>
+            <p class="desc">沿途欣賞保津川峽谷與山景。建議提前到站上廁所、買水，車上專心看風景與拍照。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">13:10<br>散步</div>
+          <div>
+            <h3 class="place">竹林小徑</h3>
+            <div class="meta">建議停留 30–45 分鐘</div>
+            <p class="desc">竹林光影很美，但人潮通常不少。可慢慢往天龍寺、野宮神社方向散步，拍照時注意人流。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">14:00<br>午餐</div>
+          <div>
+            <h3 class="place">Taisho hanana｜鯛魚料理</h3>
+            <p class="desc">以鯛魚料理聞名，適合安排成嵐山午餐亮點。建議避開最尖峰用餐或提前確認排隊狀況。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">15:30<br>漫遊</div>
+          <div>
+            <h3 class="place">渡月橋・大堰川・嵐山街區</h3>
+            <div class="meta">建議停留 90–120 分鐘</div>
+            <p class="desc">下午可沿河散步、拍渡月橋與山景，也可逛甜點、咖啡、伴手禮小店。17:30 左右回京都較剛好。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="d5" class="day" style="--day-color:#2f8b8f">
+      <div class="day-head">
+        <h2><span class="num">5</span>5/13（三）宇治＋奈良＋入住大阪</h2>
+        <p>包車轉移日｜京都 → 宇治 → 奈良 → 大阪</p>
+      </div>
+      <div class="day-body">
+        <div class="route"><b>今日重點：</b>這天同時換城市入住大阪，行李跟車走最方便。景點停留要精準，避免抵達大阪太晚。</div>
+        <div class="scene">
+          <div class="time">09:00<br>出發</div>
+          <div>
+            <h3 class="place">京都 → 宇治</h3>
+            <p class="desc">包車從京都出發前往宇治，約 10:00 抵達。建議在車上確認今日行李與飯店地址。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">10:00<br>宇治</div>
+          <div>
+            <h3 class="place">平等院・宇治川散步</h3>
+            <div class="meta">建議停留 90 分鐘</div>
+            <p class="desc">平等院鳳凰堂是宇治代表景點，適合安排正式參觀與庭園拍照。之後到宇治川散步，感受茶鄉悠閒氣氛。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">11:45<br>午餐甜點</div>
+          <div>
+            <h3 class="place">宇治午餐・抹茶甜點</h3>
+            <p class="desc">午餐可選茶蕎麥、茶香料理或簡單定食；甜點建議抹茶聖代、抹茶冰、焙茶飲品。宇治甜點店熱門，請保留排隊時間。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">13:00<br>移動</div>
+          <div>
+            <h3 class="place">宇治 → 奈良</h3>
+            <p class="desc">約 14:00 抵達奈良。下午重點放在東大寺、春日大社與奈良公園小鹿互動。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">14:00<br>奈良</div>
+          <div>
+            <h3 class="place">東大寺・春日大社・奈良公園</h3>
+            <div class="meta">建議停留 2–2.5 小時</div>
+            <p class="desc">先看東大寺大佛殿，再依體力前往春日大社。奈良公園與小鹿互動時，鹿仙貝拿好，避免小鹿跟太近嚇到小朋友。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">16:30<br>前往大阪</div>
+          <div>
+            <h3 class="place">奈良 → 大阪市區</h3>
+            <p class="desc">抵達後入住大阪紅屋頂套房飯店。晚餐可選難波、心齋橋或道頓堀附近，今天以休息為主。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="d6" class="day" style="--day-color:#7560a8">
+      <div class="day-head">
+        <h2><span class="num">6</span>5/14（四）日本環球影城</h2>
+        <p>大阪難波 → 西九條 → 環球城站｜一整天遊園</p>
+      </div>
+      <div class="day-body">
+        <div class="scene">
+          <div class="time">07:00<br>出門</div>
+          <div>
+            <h3 class="place">難波 → 西九條 → 環球城站</h3>
+            <p class="desc">從大阪難波搭阪神難波線到西九條，再轉 JR 夢咲線到環球城站。建議提早抵達，入園前先買早餐與飲水。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">開園前<br>排隊</div>
+          <div>
+            <h3 class="place">日本環球影城入園準備</h3>
+            <p class="desc">先確認門票、快速通關、園區 App、入園整理券與想玩的設施順位。熱門設施建議一入園就處理。</p>
+            <div class="tags"><span class="tag">門票</span><span class="tag">快速通關</span><span class="tag">行動電源</span><span class="tag">雨具</span></div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">全天</div>
+          <div>
+            <h3 class="place">遊樂設施・表演・園區餐食</h3>
+            <p class="desc">上午衝熱門設施，中午避開尖峰用餐，下午安排表演、商店與拍照。傍晚後園區燈光氣氛很好，適合收尾拍照。</p>
+            <div class="food"><b>用餐建議：</b>園區餐廳尖峰容易排隊，建議 11:00 前或 14:00 後用餐；攜帶小零食補充體力。</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="d7" class="day" style="--day-color:#8a623a">
+      <div class="day-head">
+        <h2><span class="num">7</span>5/15（五）姬路＋神戶</h2>
+        <p>大阪 → 姬路城 → 神戶北野 → 神戶港夜景 → 大阪</p>
+      </div>
+      <div class="day-body">
+        <div class="scene">
+          <div class="time">07:30<br>出發</div>
+          <div>
+            <h3 class="place">大阪搭 JR 到姬路</h3>
+            <div class="meta">車程約 1 小時｜姬路站步行到姬路城約 15 分鐘</div>
+            <p class="desc">建議早點出門，姬路城上午光線好、人潮相對可控。從車站一路直走即可看到城堡。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">09:30<br>姬路城</div>
+          <div>
+            <h3 class="place">姬路城</h3>
+            <div class="meta">建議停留 2–2.5 小時</div>
+            <p class="desc">白鷺城外觀非常壯觀，天守閣內部樓梯較陡，穿著需方便行走。若時間足夠，可搭配好古園散步。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">12:00<br>午餐</div>
+          <div>
+            <h3 class="place">姬路站周邊午餐</h3>
+            <p class="desc">可選姬路關東煮、穴子飯、定食或車站商場餐廳。午餐後搭 JR 前往神戶三宮。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">13:30<br>移動</div>
+          <div>
+            <h3 class="place">姬路 → 神戶三宮</h3>
+            <div class="meta">車程約 40 分鐘</div>
+            <p class="desc">抵達三宮後前往北野地區。北野一帶坡道較多，建議慢走並穿好走的鞋。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">14:30<br>神戶</div>
+          <div>
+            <h3 class="place">異人館街・北野天滿神社</h3>
+            <div class="meta">建議停留 2 小時</div>
+            <p class="desc">異人館街有西洋建築與神戶山手街景，萊茵館可作為免費參觀點。北野天滿神社位置較高，可順道看城市景。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">傍晚<br>晚餐夜景</div>
+          <div>
+            <h3 class="place">神戶晚餐・神戶港夜景</h3>
+            <p class="desc">晚餐可安排神戶牛、洋食、港邊餐廳或三宮美食。飯後前往神戶港看夜景，再回大阪。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="d8" class="day" style="--day-color:#c7563c">
+      <div class="day-head">
+        <h2><span class="num">8</span>5/16（六）大阪市區美食購物日</h2>
+        <p>木津市場 → 難波八阪神社 → 新世界 → 天王寺／阿倍野 → 心齋橋購物</p>
+      </div>
+      <div class="day-body">
+        <div class="scene">
+          <div class="time">08:00<br>市場</div>
+          <div>
+            <h3 class="place">木津卸賣市場</h3>
+            <div class="meta">Osaka Metro 大國町站步行約 3 分｜建議停留 75–90 分鐘</div>
+            <p class="desc">大阪在地批發市場，比黑門市場更有本地感。適合早上來吃海鮮丼、壽司或市場食堂早餐。</p>
+            <div class="food"><b>早餐候選：</b>海鮮丼、壽司、ゑんどう壽司、大吉壽司、市場食堂。</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">09:40<br>步行</div>
+          <div>
+            <h3 class="place">難波八阪神社</h3>
+            <div class="meta">木津市場步行約 8–10 分鐘｜建議停留 30 分鐘</div>
+            <p class="desc">巨大獅子殿非常有記憶點，早上光線佳、人潮通常較少，適合拍照與簡短參拜。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">10:30<br>前往</div>
+          <div>
+            <h3 class="place">通天閣・新世界商圈</h3>
+            <div class="meta">難波站搭一站至動物園前或惠美須町｜建議停留 2 小時</div>
+            <p class="desc">新世界有濃厚大阪復古商圈氣氛，通天閣、招牌街景、串炸店與章魚燒都適合安排在這段。</p>
+            <div class="food"><b>午餐建議：</b>串炸達摩、八重勝、章魚燒。串炸記得一支一支吃，避免點太多後面走不動。</div>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">13:00<br>展望</div>
+          <div>
+            <h3 class="place">天王寺公園 or 阿倍野展望台</h3>
+            <div class="meta">建議停留 60–120 分鐘，依體力決定</div>
+            <p class="desc">若想輕鬆散步，選天王寺公園；若想看大阪市景，選阿倍野展望台。這段可視天氣與體力彈性調整。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">15:30<br>購物</div>
+          <div>
+            <h3 class="place">難波・心齋橋購物</h3>
+            <p class="desc">最後一天適合補買伴手禮、藥妝、零食與百貨。建議先列清單，避免重複走回頭路。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">晚餐</div>
+          <div>
+            <h3 class="place">道頓堀晚餐</h3>
+            <p class="desc">可依預算與口味選道頓堀蟹道樂、燒肉一丁、章魚燒本家山醬，或沿道頓堀邊走邊吃大阪小吃。</p>
+            <div class="tags"><span class="tag">蟹料理</span><span class="tag">燒肉</span><span class="tag">章魚燒</span><span class="tag">伴手禮</span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article id="d9" class="day" style="--day-color:#9f4f5c">
+      <div class="day-head">
+        <h2><span class="num">9</span>5/17（日）回家</h2>
+        <p>大阪市區 → 關西機場 → 桃園｜收心返台日</p>
+      </div>
+      <div class="day-body">
+        <div class="scene">
+          <div class="time">上午</div>
+          <div>
+            <h3 class="place">退房與前往關西機場</h3>
+            <p class="desc">回程班機 13:25 起飛，建議至少預留機場報到、安檢、退稅與交通緩衝。若住難波，可依實際位置選南海電鐵或其他機場交通。</p>
+          </div>
+        </div>
+        <div class="scene">
+          <div class="time">13:25<br>起飛</div>
+          <div>
+            <h3 class="place">星宇航空 JX821｜關西 → 桃園</h3>
+            <div class="meta">抵達桃園 15:20</div>
+            <p class="desc">把護照、錢包、交通卡、退稅單據與行動電源放在隨身包。行李箱預留重量給伴手禮。</p>
+          </div>
+        </div>
+        <div class="footer">滿載回憶，期待下次再見！</div>
+      </div>
+    </article>
+
+    <section>
+      <h2 class="section-title"><span>🎒</span>行前與旅途中提醒</h2>
+      <div class="tip-grid">
+        <div class="tip"><b>交通票券：</b>HARUKA、JR、京阪、阪神難波線、JR 夢咲線都會用到，建議事先確認 IC 卡餘額與指定席需求。</div>
+        <div class="tip"><b>餐廳預約：</b>三嶋亭本店、Taisho hanana、蟹道樂、熱門燒肉店建議能預約就預約，避免排隊影響行程。</div>
+        <div class="tip"><b>鞋子與體力：</b>清水寺、伏見稻荷、北野、姬路城與大阪購物日都步行多，請穿舒適好走的鞋。</div>
+        <div class="tip"><b>天氣備案：</b>若下雨，嵐山、奈良、神戶港夜景體驗會受影響，可多安排咖啡店、百貨或室內展望台。</div>
+        <div class="tip"><b>行李策略：</b>5/13 從京都換到大阪，包車日適合直接帶行李移動；貴重物品務必隨身。</div>
+        <div class="tip"><b>拍照重點：</b>祇園夜景、伊根舟屋、天橋立俯瞰、和服清水寺、千本鳥居、竹林、奈良鹿、神戶港夜景。</div>
+      </div>
+
+      <details>
+        <summary>建議攜帶清單</summary>
+        <p>護照、機票資料、信用卡、現金、IC 交通卡、行動電源、充電線、雨具、薄外套、常備藥、濕紙巾、垃圾袋、好走鞋、相機或手機備用容量。</p>
+      </details>
+
+      <details>
+        <summary>每日強度評估</summary>
+        <p>低：5/9、5/12、5/17。中：5/11、5/14、5/16。高：5/10、5/13、5/15。高強度日建議前一晚早睡，早餐與水分要準備好。</p>
+      </details>
+    </section>
+
+    <div class="footer">行程愉快，旅途平安！</div>
+  </main>
+
+  <a class="topbtn" href="#top">↑ 回頂部</a>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
