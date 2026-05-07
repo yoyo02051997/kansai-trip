@@ -538,6 +538,136 @@
       .time { font-size: 14px; }
     }
 
+
+    .menu-toggle {
+      position: fixed;
+      left: 14px;
+      bottom: 16px;
+      z-index: 40;
+      border: 0;
+      background: #33241d;
+      color: #fff8ec;
+      border-radius: 999px;
+      padding: 11px 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.18);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .side-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      background: rgba(47,38,31,.34);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 50;
+      width: min(82vw, 310px);
+      padding: 18px 14px;
+      background: rgba(255,253,248,.98);
+      border-right: 1px solid var(--line);
+      box-shadow: 18px 0 38px rgba(81, 52, 25, .18);
+      transform: translateX(-105%);
+      transition: transform .22s ease;
+      overflow-y: auto;
+    }
+
+    .side-menu.open { transform: translateX(0); }
+    .side-backdrop.open { opacity: 1; pointer-events: auto; }
+
+    .side-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: #6d2b20;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .side-close {
+      border: 0;
+      background: #fff2db;
+      color: #7c3b2f;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .side-group-label {
+      margin: 16px 8px 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .08em;
+    }
+
+    .side-link {
+      display: block;
+      width: 100%;
+      text-align: left;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fffaf2;
+      color: #4b3125;
+      border-radius: 16px;
+      padding: 11px 12px;
+      margin: 7px 0;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .side-link.active {
+      background: #3a2c25;
+      color: #fff8ec;
+      border-color: #3a2c25;
+    }
+
+    .app-page { display: none; }
+    .app-page.active { display: block; }
+
+    .page-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;
+      padding: 7px 11px;
+      margin: 0 0 12px;
+      background: #fff2db;
+      border: 1px solid #ecd5b7;
+      color: #785038;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    body.split-page .quicknav,
+    body.split-page .topbtn { display: none; }
+
+    @media (min-width: 1040px) {
+      .menu-toggle { display: none; }
+      .side-backdrop { display: none; }
+      .side-menu {
+        transform: none;
+        width: 250px;
+        box-shadow: none;
+        background: rgba(255,248,238,.86);
+      }
+      .wrap { margin-left: calc((100vw - min(100%, 920px)) / 2 + 125px); }
+      .side-close { display: none; }
+    }
+
     @media (max-width: 380px) {
       .scene { grid-template-columns: 78px 1fr; gap: 9px; }
       .time { font-size: 12px; }
@@ -547,7 +677,30 @@
 </head>
 
 <body>
+
+  <button class="menu-toggle" id="menuToggle" type="button" aria-label="開啟選單">☰ 選單</button>
+  <div class="side-backdrop" id="sideBackdrop"></div>
+  <aside class="side-menu" id="sideMenu" aria-label="側邊選單">
+    <div class="side-title">
+      <span>關西旅遊攻略</span>
+      <button class="side-close" id="sideClose" type="button" aria-label="關閉選單">×</button>
+    </div>
+    <div class="side-group-label">頁面</div>
+    <button class="side-link active" type="button" data-page-link="itinerary">🗓 行程頁</button>
+    <button class="side-link" type="button" data-page-link="split">💰 分帳頁</button>
+    <div class="side-group-label">行程快速跳轉</div>
+    <a class="side-link" href="#d1" data-page-link="itinerary">5/9 京都</a>
+    <a class="side-link" href="#d2" data-page-link="itinerary">5/10 水之京都</a>
+    <a class="side-link" href="#d3" data-page-link="itinerary">5/11 和服</a>
+    <a class="side-link" href="#d4" data-page-link="itinerary">5/12 嵐山</a>
+    <a class="side-link" href="#d5" data-page-link="itinerary">5/13 宇治奈良</a>
+    <a class="side-link" href="#d6" data-page-link="itinerary">5/14 USJ</a>
+    <a class="side-link" href="#d7" data-page-link="itinerary">5/15 姬路神戶</a>
+    <a class="side-link" href="#d8" data-page-link="itinerary">5/16 大阪</a>
+    <a class="side-link" href="#d9" data-page-link="itinerary">5/17 回家</a>
+  </aside>
   <main id="top" class="wrap">
+    <section id="page-itinerary" class="app-page active" data-page="itinerary">
     <header class="hero">
       <h1>關西 5/9–5/17<br>旅遊攻略</h1>
       <p class="subtitle">九天八夜｜京都、伊根、天橋立、美山、宇治、奈良、大阪、姬路、神戶</p>
@@ -575,7 +728,6 @@
       <a href="#d7">5/15 姬路神戶</a>
       <a href="#d8">5/16 大阪</a>
       <a href="#d9">5/17 回家</a>
-      <a href="#split">分帳</a>
     </nav>
 
     <section>
@@ -1023,8 +1175,36 @@
 
 
 
-    <section id="split" class="split-card">
+
+    <section>
+      <h2 class="section-title"><span>🎒</span>行前與旅途中提醒</h2>
+      <div class="tip-grid">
+        <div class="tip"><b>交通票券：</b>HARUKA、JR、京阪、阪神難波線、JR 夢咲線都會用到，建議事先確認 IC 卡餘額與指定席需求。</div>
+        <div class="tip"><b>餐廳預約：</b>三嶋亭本店、Taisho hanana、蟹道樂、熱門燒肉店建議能預約就預約，避免排隊影響行程。</div>
+        <div class="tip"><b>鞋子與體力：</b>清水寺、伏見稻荷、北野、姬路城與大阪購物日都步行多，請穿舒適好走的鞋。</div>
+        <div class="tip"><b>天氣備案：</b>若下雨，嵐山、奈良、神戶港夜景體驗會受影響，可多安排咖啡店、百貨或室內展望台。</div>
+        <div class="tip"><b>行李策略：</b>5/13 從京都換到大阪，包車日適合直接帶行李移動；貴重物品務必隨身。</div>
+        <div class="tip"><b>拍照重點：</b>祇園夜景、伊根舟屋、天橋立俯瞰、和服清水寺、千本鳥居、竹林、奈良鹿、神戶港夜景。</div>
+      </div>
+
+      <details>
+        <summary>建議攜帶清單</summary>
+        <p>護照、機票資料、信用卡、現金、IC 交通卡、行動電源、充電線、雨具、薄外套、常備藥、濕紙巾、垃圾袋、好走鞋、相機或手機備用容量。</p>
+      </details>
+
+      <details>
+        <summary>每日強度評估</summary>
+        <p>低：5/9、5/12、5/17。中：5/11、5/14、5/16。高：5/10、5/13、5/15。高強度日建議前一晚早睡，早餐與水分要準備好。</p>
+      </details>
+    </section>
+
+    <div class="footer">行程愉快，旅途平安！</div>
+    </section>
+
+
+    <section id="page-split" class="app-page split-card" data-page="split">
       <div class="split-head">
+        <div class="page-kicker">側邊選單獨立頁面</div>
         <h2>💰 旅行分帳</h2>
         <p>新增同行者與支出項目後，系統會自動計算每個人應付／應收，並整理成「誰要給誰多少」。</p>
       </div>
@@ -1087,30 +1267,6 @@
         </div>
       </div>
     </section>
-
-    <section>
-      <h2 class="section-title"><span>🎒</span>行前與旅途中提醒</h2>
-      <div class="tip-grid">
-        <div class="tip"><b>交通票券：</b>HARUKA、JR、京阪、阪神難波線、JR 夢咲線都會用到，建議事先確認 IC 卡餘額與指定席需求。</div>
-        <div class="tip"><b>餐廳預約：</b>三嶋亭本店、Taisho hanana、蟹道樂、熱門燒肉店建議能預約就預約，避免排隊影響行程。</div>
-        <div class="tip"><b>鞋子與體力：</b>清水寺、伏見稻荷、北野、姬路城與大阪購物日都步行多，請穿舒適好走的鞋。</div>
-        <div class="tip"><b>天氣備案：</b>若下雨，嵐山、奈良、神戶港夜景體驗會受影響，可多安排咖啡店、百貨或室內展望台。</div>
-        <div class="tip"><b>行李策略：</b>5/13 從京都換到大阪，包車日適合直接帶行李移動；貴重物品務必隨身。</div>
-        <div class="tip"><b>拍照重點：</b>祇園夜景、伊根舟屋、天橋立俯瞰、和服清水寺、千本鳥居、竹林、奈良鹿、神戶港夜景。</div>
-      </div>
-
-      <details>
-        <summary>建議攜帶清單</summary>
-        <p>護照、機票資料、信用卡、現金、IC 交通卡、行動電源、充電線、雨具、薄外套、常備藥、濕紙巾、垃圾袋、好走鞋、相機或手機備用容量。</p>
-      </details>
-
-      <details>
-        <summary>每日強度評估</summary>
-        <p>低：5/9、5/12、5/17。中：5/11、5/14、5/16。高：5/10、5/13、5/15。高強度日建議前一晚早睡，早餐與水分要準備好。</p>
-      </details>
-    </section>
-
-    <div class="footer">行程愉快，旅途平安！</div>
   </main>
 
   <a class="topbtn" href="#top">↑ 回頂部</a>
@@ -1272,15 +1428,73 @@
     });
     renderSplitBill();
 
-    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    const sideMenu = document.getElementById('sideMenu');
+    const sideBackdrop = document.getElementById('sideBackdrop');
+    const pageLinks = document.querySelectorAll('[data-page-link]');
+
+    function openMenu() {
+      sideMenu?.classList.add('open');
+      sideBackdrop?.classList.add('open');
+    }
+
+    function closeMenu() {
+      sideMenu?.classList.remove('open');
+      sideBackdrop?.classList.remove('open');
+    }
+
+    function showPage(page, targetSelector) {
+      document.querySelectorAll('.app-page').forEach(function(section) {
+        section.classList.toggle('active', section.dataset.page === page);
+      });
+      document.body.classList.toggle('split-page', page === 'split');
+      pageLinks.forEach(function(link) {
+        link.classList.toggle('active', link.dataset.pageLink === page && !link.getAttribute('href'));
+      });
+      closeMenu();
+
+      if (page === 'split') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        history.replaceState(null, '', '#split');
+        renderSplitBill();
+        return;
+      }
+
+      const target = targetSelector ? document.querySelector(targetSelector) : document.getElementById('top');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', targetSelector || '#top');
+      }
+    }
+
+    document.getElementById('menuToggle')?.addEventListener('click', openMenu);
+    document.getElementById('sideClose')?.addEventListener('click', closeMenu);
+    sideBackdrop?.addEventListener('click', closeMenu);
+
+    document.querySelectorAll('[data-page-link]').forEach(function(link) {
       link.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
+        const page = this.dataset.pageLink;
+        const href = this.getAttribute('href');
+        e.preventDefault();
+        showPage(page, href && href.startsWith('#') ? href : null);
+      });
+    });
+
+    document.querySelectorAll('.quicknav a[href^="#"], .topbtn[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        const targetSelector = this.getAttribute('href');
+        const target = document.querySelector(targetSelector);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          showPage('itinerary', targetSelector);
         }
       });
     });
+
+    if (location.hash === '#split') {
+      showPage('split');
+    } else if (location.hash && document.querySelector(location.hash)) {
+      showPage('itinerary', location.hash);
+    }
   </script>
 </body>
 </html>
