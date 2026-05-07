@@ -357,9 +357,180 @@
       font-size: 13px;
     }
 
+
+
+    .split-card {
+      background: rgba(255,253,248,.96);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      margin: 16px 0;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .split-head {
+      padding: 16px 15px 14px;
+      color: white;
+      background: linear-gradient(135deg, #4f6f52, #2d4f3a);
+    }
+
+    .split-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .split-head p {
+      margin: 6px 0 0;
+      font-size: 13px;
+      opacity: .95;
+    }
+
+    .split-body { padding: 14px; }
+
+    .split-panel {
+      background: #fff8ef;
+      border: 1px solid #edd8c6;
+      border-radius: 18px;
+      padding: 13px;
+      margin-bottom: 12px;
+    }
+
+    .split-panel h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      color: #4b3125;
+    }
+
+    .split-row {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .split-input,
+    .split-select {
+      width: 100%;
+      border: 1px solid #e0c5aa;
+      border-radius: 14px;
+      background: #fffdf8;
+      color: var(--ink);
+      padding: 10px 11px;
+      font: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .split-input:focus,
+    .split-select:focus {
+      border-color: #b94635;
+      box-shadow: 0 0 0 3px rgba(185,70,53,.12);
+    }
+
+    .split-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 13px;
+      background: #3a2c25;
+      color: #fff8ec;
+      font: inherit;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .split-btn.secondary {
+      background: #fffdf8;
+      color: #5a4437;
+      border: 1px solid var(--line);
+    }
+
+    .people-list,
+    .payer-checks,
+    .split-summary,
+    .settle-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .person-pill,
+    .payer-check,
+    .summary-pill,
+    .settle-pill {
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      background: #fffdf8;
+      border: 1px solid var(--line);
+      color: #59463b;
+    }
+
+    .person-pill button {
+      margin-left: 6px;
+      border: 0;
+      background: transparent;
+      color: #9c352a;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .payer-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .split-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fffdf8;
+    }
+
+    .split-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+      font-size: 14px;
+    }
+
+    .split-table th,
+    .split-table td {
+      text-align: left;
+      padding: 10px 9px;
+      border-bottom: 1px solid #ead7c3;
+      vertical-align: top;
+    }
+
+    .split-table th {
+      color: #6d2b20;
+      background: #fff4e4;
+      white-space: nowrap;
+    }
+
+    .split-table tr:last-child td { border-bottom: 0; }
+
+    .delete-expense {
+      border: 0;
+      border-radius: 999px;
+      background: #fff0e9;
+      color: #9c352a;
+      padding: 5px 8px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .empty-state {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 6px 0 0;
+    }
+
     @media (min-width: 720px) {
       .wrap { padding: 28px 18px 78px; }
       .overview { grid-template-columns: repeat(3, 1fr); }
+      .split-row { grid-template-columns: 1fr 1fr auto; align-items: end; }
       .mini { grid-template-columns: repeat(2, 1fr); }
       .tip-grid { grid-template-columns: repeat(2, 1fr); }
       .day-head h2 { font-size: 24px; }
@@ -404,6 +575,7 @@
       <a href="#d7">5/15 姬路神戶</a>
       <a href="#d8">5/16 大阪</a>
       <a href="#d9">5/17 回家</a>
+      <a href="#split">分帳</a>
     </nav>
 
     <section>
@@ -849,6 +1021,73 @@
       </div>
     </article>
 
+
+
+    <section id="split" class="split-card">
+      <div class="split-head">
+        <h2>💰 旅行分帳</h2>
+        <p>新增同行者與支出項目後，系統會自動計算每個人應付／應收，並整理成「誰要給誰多少」。</p>
+      </div>
+      <div class="split-body">
+        <div class="split-panel">
+          <h3>1. 新增同行者</h3>
+          <div class="split-row">
+            <input id="personName" class="split-input" type="text" placeholder="輸入姓名，例如：小明" />
+            <button id="addPersonBtn" class="split-btn" type="button">新增人員</button>
+            <button id="resetSplitBtn" class="split-btn secondary" type="button">清空分帳</button>
+          </div>
+          <div id="peopleList" class="people-list" aria-live="polite"></div>
+          <p class="empty-state">建議先把所有同行者加入，再開始新增花費。</p>
+        </div>
+
+        <div class="split-panel">
+          <h3>2. 新增花費</h3>
+          <div class="split-row">
+            <input id="expenseTitle" class="split-input" type="text" placeholder="花了什麼，例如：晚餐、計程車、門票" />
+            <input id="expenseAmount" class="split-input" type="number" min="0" step="1" placeholder="金額，例如：3200" />
+            <select id="expensePayer" class="split-select" aria-label="付款人"></select>
+          </div>
+          <p class="meta">誰要一起分攤：</p>
+          <div id="splitChecks" class="payer-checks"></div>
+          <div style="margin-top:12px">
+            <button id="addExpenseBtn" class="split-btn" type="button">新增這筆支出</button>
+          </div>
+        </div>
+
+        <div class="split-panel">
+          <h3>3. 支出明細</h3>
+          <div class="split-table-wrap">
+            <table class="split-table">
+              <thead>
+                <tr>
+                  <th>項目</th>
+                  <th>金額</th>
+                  <th>付款人</th>
+                  <th>分攤者</th>
+                  <th>每人</th>
+                  <th>刪除</th>
+                </tr>
+              </thead>
+              <tbody id="expenseTable"></tbody>
+            </table>
+          </div>
+          <p id="expenseEmpty" class="empty-state">目前還沒有支出。</p>
+        </div>
+
+        <div class="mini">
+          <div class="split-panel">
+            <h3>每人結算</h3>
+            <div id="balanceSummary" class="split-summary"></div>
+            <p class="empty-state">正數代表應收，負數代表應付。</p>
+          </div>
+          <div class="split-panel">
+            <h3>誰給誰多少</h3>
+            <div id="settlementList" class="settle-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section>
       <h2 class="section-title"><span>🎒</span>行前與旅途中提醒</h2>
       <div class="tip-grid">
@@ -877,6 +1116,162 @@
   <a class="topbtn" href="#top">↑ 回頂部</a>
 
   <script>
+
+
+    const splitState = JSON.parse(localStorage.getItem('kansaiSplitState') || '{"people":[],"expenses":[]}');
+    const money = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
+
+    function saveSplitState() {
+      localStorage.setItem('kansaiSplitState', JSON.stringify(splitState));
+    }
+
+    function renderSplitBill() {
+      const peopleList = document.getElementById('peopleList');
+      const payer = document.getElementById('expensePayer');
+      const checks = document.getElementById('splitChecks');
+      const table = document.getElementById('expenseTable');
+      const empty = document.getElementById('expenseEmpty');
+      const summary = document.getElementById('balanceSummary');
+      const settlements = document.getElementById('settlementList');
+      if (!peopleList || !payer || !checks || !table || !summary || !settlements) return;
+
+      peopleList.innerHTML = splitState.people.length
+        ? splitState.people.map(name => `<span class="person-pill">${escapeHtml(name)}<button type="button" onclick="removePerson('${escapeAttr(name)}')">×</button></span>`).join('')
+        : '<span class="empty-state">尚未新增人員</span>';
+
+      payer.innerHTML = splitState.people.length
+        ? splitState.people.map(name => `<option value="${escapeAttr(name)}">付款人：${escapeHtml(name)}</option>`).join('')
+        : '<option value="">請先新增人員</option>';
+
+      checks.innerHTML = splitState.people.length
+        ? splitState.people.map(name => `<label class="payer-check"><input type="checkbox" value="${escapeAttr(name)}" checked />${escapeHtml(name)}</label>`).join('')
+        : '<span class="empty-state">新增人員後可選擇分攤者</span>';
+
+      table.innerHTML = splitState.expenses.map((expense, index) => {
+        const share = expense.participants.length ? expense.amount / expense.participants.length : 0;
+        return `<tr>
+          <td>${escapeHtml(expense.title)}</td>
+          <td>¥${money.format(expense.amount)}</td>
+          <td>${escapeHtml(expense.payer)}</td>
+          <td>${expense.participants.map(escapeHtml).join('、')}</td>
+          <td>¥${money.format(share)}</td>
+          <td><button class="delete-expense" type="button" onclick="removeExpense(${index})">刪除</button></td>
+        </tr>`;
+      }).join('');
+      empty.style.display = splitState.expenses.length ? 'none' : 'block';
+
+      const balances = calculateBalances();
+      summary.innerHTML = splitState.people.length
+        ? splitState.people.map(name => {
+            const value = Math.round((balances[name] || 0));
+            const label = value >= 0 ? `應收 ¥${money.format(value)}` : `應付 ¥${money.format(Math.abs(value))}`;
+            return `<span class="summary-pill">${escapeHtml(name)}｜${label}</span>`;
+          }).join('')
+        : '<span class="empty-state">新增支出後會顯示結算結果</span>';
+
+      const settle = calculateSettlements(balances);
+      settlements.innerHTML = settle.length
+        ? settle.map(item => `<span class="settle-pill">${escapeHtml(item.from)} → ${escapeHtml(item.to)}：¥${money.format(item.amount)}</span>`).join('')
+        : '<span class="empty-state">目前沒有需要互相給付的金額</span>';
+    }
+
+    function addPerson() {
+      const input = document.getElementById('personName');
+      const name = input.value.trim();
+      if (!name) return alert('請輸入姓名');
+      if (splitState.people.includes(name)) return alert('這個人已經新增過了');
+      splitState.people.push(name);
+      input.value = '';
+      saveSplitState();
+      renderSplitBill();
+    }
+
+    function removePerson(name) {
+      const hasExpense = splitState.expenses.some(expense => expense.payer === name || expense.participants.includes(name));
+      if (hasExpense && !confirm(`${name} 已出現在支出明細中，刪除後相關支出也會被移除。確定刪除？`)) return;
+      splitState.people = splitState.people.filter(person => person !== name);
+      splitState.expenses = splitState.expenses.filter(expense => expense.payer !== name && !expense.participants.includes(name));
+      saveSplitState();
+      renderSplitBill();
+    }
+
+    function addExpense() {
+      const title = document.getElementById('expenseTitle').value.trim();
+      const amount = Number(document.getElementById('expenseAmount').value);
+      const payer = document.getElementById('expensePayer').value;
+      const participants = Array.from(document.querySelectorAll('#splitChecks input:checked')).map(input => input.value);
+      if (!title) return alert('請輸入花費項目');
+      if (!amount || amount <= 0) return alert('請輸入正確金額');
+      if (!payer) return alert('請選擇付款人');
+      if (!participants.length) return alert('請至少選一位分攤者');
+      splitState.expenses.push({ title, amount, payer, participants });
+      document.getElementById('expenseTitle').value = '';
+      document.getElementById('expenseAmount').value = '';
+      saveSplitState();
+      renderSplitBill();
+    }
+
+    function removeExpense(index) {
+      splitState.expenses.splice(index, 1);
+      saveSplitState();
+      renderSplitBill();
+    }
+
+    function calculateBalances() {
+      const balances = Object.fromEntries(splitState.people.map(name => [name, 0]));
+      splitState.expenses.forEach(expense => {
+        balances[expense.payer] = (balances[expense.payer] || 0) + expense.amount;
+        const share = expense.amount / expense.participants.length;
+        expense.participants.forEach(name => {
+          balances[name] = (balances[name] || 0) - share;
+        });
+      });
+      return balances;
+    }
+
+    function calculateSettlements(balances) {
+      const debtors = [];
+      const creditors = [];
+      Object.entries(balances).forEach(([name, value]) => {
+        const rounded = Math.round(value);
+        if (rounded < 0) debtors.push({ name, amount: Math.abs(rounded) });
+        if (rounded > 0) creditors.push({ name, amount: rounded });
+      });
+      const result = [];
+      let i = 0, j = 0;
+      while (i < debtors.length && j < creditors.length) {
+        const amount = Math.min(debtors[i].amount, creditors[j].amount);
+        if (amount > 0) result.push({ from: debtors[i].name, to: creditors[j].name, amount });
+        debtors[i].amount -= amount;
+        creditors[j].amount -= amount;
+        if (debtors[i].amount === 0) i++;
+        if (creditors[j].amount === 0) j++;
+      }
+      return result;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[char]));
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replace(/'/g, '&#39;');
+    }
+
+    document.getElementById('addPersonBtn')?.addEventListener('click', addPerson);
+    document.getElementById('addExpenseBtn')?.addEventListener('click', addExpense);
+    document.getElementById('resetSplitBtn')?.addEventListener('click', function() {
+      if (!confirm('確定要清空所有人員與支出嗎？')) return;
+      splitState.people = [];
+      splitState.expenses = [];
+      saveSplitState();
+      renderSplitBill();
+    });
+    document.getElementById('personName')?.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') addPerson();
+    });
+    renderSplitBill();
+
     document.querySelectorAll('a[href^="#"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         const target = document.querySelector(this.getAttribute('href'));
